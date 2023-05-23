@@ -459,7 +459,7 @@ public class LinkedList2Test {
         Node node = new Node(1);
         list.addInTail(node);
 
-        list.AddToHead(null);
+        list.addToHead(null);
 
         assertEquals(list.head, node);
         assertNull(list.head.next);
@@ -472,7 +472,7 @@ public class LinkedList2Test {
     void AddToHead_empty_list(){
         Node node = new Node(1);
 
-        list.AddToHead( node);
+        list.addToHead( node);
 
         assertEquals(list.head, node);
         assertEquals(list.tail, node);
@@ -487,7 +487,7 @@ public class LinkedList2Test {
         list.addInTail(node_1);
         Node node_2 = new Node(1);
 
-        list.AddToHead(node_2);
+        list.addToHead(node_2);
 
         assertEquals(list.head, node_2);
         assertNull(list.head.prev);

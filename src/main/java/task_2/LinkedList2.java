@@ -95,31 +95,19 @@ public class LinkedList2 {
         if (_nodeToInsert == null) {
             return;
         }
-        if (_nodeAfter == null) {
-            if (head == null) {
-                addInTail(_nodeToInsert);
-            } else {
-                _nodeToInsert.next = head;
-                head.prev = _nodeToInsert;
-                _nodeToInsert.prev = null;
-                head = _nodeToInsert;
-            }
-        } else {
-
+        if (_nodeAfter == null && head == null  || _nodeAfter != null && _nodeAfter == tail) {
+            addInTail(_nodeToInsert);
+        } else if (_nodeAfter == null) {
+            addToHead(_nodeToInsert);
+        }else {
             _nodeToInsert.next = _nodeAfter.next;
             _nodeToInsert.prev = _nodeAfter;
             _nodeAfter.next = _nodeToInsert;
-
-            if (_nodeAfter == tail) {
-                tail = _nodeToInsert;
-                return;
-            }
-
             _nodeToInsert.next.prev = _nodeToInsert;
         }
     }
 
-    public void AddToHead(Node _nodeToAdd) {
+    public void addToHead(Node _nodeToAdd) {
         if (_nodeToAdd == null) {
             return;
         }
@@ -134,14 +122,12 @@ public class LinkedList2 {
     }
 
     private void removeNode(Node node){
-        if (node == head) {
-            if (head == tail) {
-                clear();
-            } else {
-                head = head.next;
-                head.prev = null;
-            }
-        } else if (node == tail) {
+        if (node == head && node == tail) {
+            clear();
+        } else if (node == head){
+            head = head.next;
+            head.prev = null;
+        }else if (node == tail) {
             tail = tail.prev;
             tail.next = null;
         } else {
