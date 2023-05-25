@@ -110,6 +110,20 @@ public class DynArrayTest {
     }
 
     @Test
+    void remove_with_no_rounding() {
+        for(int i = 0; i < 33; i++) {
+            array.append(Integer.valueOf(i));
+        }
+        assertEquals(64, array.capacity);
+        assertEquals(33, array.count);
+        for(int i = 0; i < 2; i++) {
+            array.remove(i);
+        }
+        assertEquals(31, array.count);
+        assertEquals(42,array.capacity );
+    }
+
+    @Test
     void remove_illegal_index_negative() {
         for(int i = 0; i < 3; i++) {
             array.append(Integer.valueOf(i));
