@@ -9,7 +9,7 @@ public class DynArray<T> {
     Class clazz;
 
     public DynArray(Class clz) {
-        clazz = clz; // нужен для безопасного приведения типов
+        clazz = clz;
         // new DynArray<Integer>(Integer.class);
 
         count = 0;
