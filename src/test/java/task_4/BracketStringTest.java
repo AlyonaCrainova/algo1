@@ -24,4 +24,10 @@ public class BracketStringTest {
         boolean balanced = bracketString.isBalanced("))((");
         assertFalse(balanced);
     }
+
+    @Test
+    void isBalanced_with_illegal_character() {
+        boolean balanced = bracketString.isBalanced("(i)");
+        assertFalse(balanced);
+    }
 }
