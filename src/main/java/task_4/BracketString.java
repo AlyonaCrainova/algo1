@@ -4,18 +4,16 @@ import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class BracketString {
-    public boolean isBalanced(String input){
-        Stack<Character>stack = new Stack<>();
+    public boolean isBalanced(String input) {
+        Stack<Character> stack = new Stack<>();
         for (int i = 0; i < input.length(); i++) {
             char sign = input.charAt(i);
-            if (sign == '('){
+            if (sign == '(') {
                 stack.push('(');
-            }else if(sign == ')'){
-                try {
-                    stack.pop();
-                }catch (EmptyStackException e){
-                    return false;
-                }
+            } else if (sign == ')' && !stack.empty()) {
+                stack.pop();
+            } else {
+                return false;
             }
         }
         return stack.empty();

@@ -14,11 +14,7 @@ public class Stack<T> {
     }
 
     public T pop() {
-        try {
-            return list.pop();
-        } catch (NoSuchElementException e) {
-            return null;
-        }
+       return list.size() == 0? null: list.pop();
     }
 
     public void push(T val) {
