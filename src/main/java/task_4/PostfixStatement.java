@@ -3,12 +3,12 @@ package task_4;
 import java.util.Stack;
 
 public class PostfixStatement {
-    private Integer previousResult;
+    private Double previousResult;
 
-    public Integer calculate(String input) throws NumberFormatException {
+    public Double calculate(String input) throws NumberFormatException {
         String reversedInput = new StringBuilder(input).reverse().toString();
         Stack<String> stack_1 = new Stack<>();
-        Stack<String> stack_2 = new Stack<>();
+        Stack<Double> stack_2 = new Stack<>();
         for (String operand : reversedInput.split(" ")) {
             stack_1.push(operand);
         }
@@ -16,24 +16,32 @@ public class PostfixStatement {
             String operand = stack_1.pop();
             switch (operand) {
                 case "+" -> {
-                    int result = Integer.parseInt(stack_2.pop()) + Integer.parseInt(stack_2.pop());
-                    stack_2.push(String.valueOf(result));
+                    stack_2.push(stack_2.pop() + stack_2.pop());
+                }
+                case "-" -> {
+                    Double subtrahend = stack_2.pop();
+                    Double minuend = stack_2.pop();
+                    stack_2.push(minuend - subtrahend);
                 }
                 case "*" -> {
-                    int result = Integer.parseInt(stack_2.pop()) * Integer.parseInt(stack_2.pop());
-                    stack_2.push(String.valueOf(result));
+                    stack_2.push(stack_2.pop() * stack_2.pop());
+                }
+                case "/" -> {
+                    Double divisor = stack_2.pop();
+                    Double dividend = stack_2.pop();
+                    stack_2.push(dividend/divisor);
                 }
                 case "=" -> {
-                    return Integer.parseInt(stack_2.pop());
+                    return stack_2.pop();
                 }
-                default -> stack_2.push(operand);
+                default -> stack_2.push(Double.parseDouble(operand));
             }
         }
-        previousResult = Integer.parseInt(stack_2.pop());
+        previousResult = stack_2.pop();
         return null;
     }
 
-    public Integer getPreviousResult(){
+    public Double getPreviousResult(){
         return previousResult;
     }
 }

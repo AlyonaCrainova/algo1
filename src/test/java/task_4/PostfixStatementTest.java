@@ -9,14 +9,14 @@ public class PostfixStatementTest {
 
     @Test
     void calculate_without_return_value() {
-        Integer result = statement.calculate("1 2 + 3 *");
+        Double result = statement.calculate("1 2 + 3 *");
         assertNull(result);
         assertEquals(9, statement.getPreviousResult());
     }
 
     @Test
     void calculate_with_return_value() {
-        Integer result = statement.calculate("8 2 + 5 * 9 + =");
+        Double result = statement.calculate("8 2 + 5 * 9 + =");
         assertEquals(59, result);
     }
 
@@ -37,18 +37,22 @@ public class PostfixStatementTest {
     }
 
     @Test
-    void calculate_invalid_input_division() {
-        Exception exception = assertThrows(NumberFormatException.class, () -> {
-            statement.calculate("3 10 15 / *");
-        });
-        assertNotNull(exception);
-    }
-
-    @Test
     void calculate_invalid_input_empty() {
         Exception exception = assertThrows(NumberFormatException.class, () -> {
             statement.calculate("");
         });
         assertNotNull(exception);
+    }
+
+    @Test
+    void calculate_division() {
+        Double result = statement.calculate("8 2 + 5 * 5 / =");
+        assertEquals(10, result);
+    }
+
+    @Test
+    void calculate_subtraction() {
+        Double result = statement.calculate("8 2 + 5 * 5 - =");
+        assertEquals(45, result);
     }
 }
