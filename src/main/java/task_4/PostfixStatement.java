@@ -23,7 +23,7 @@ public class PostfixStatement {
                 case "+" -> {
                     Double addend_1 = stack_2.pop();
                     Double addend_2 = stack_2.pop();
-                    stack_2.push( addend_1 + addend_2);
+                    stack_2.push(addend_1 + addend_2);
                 }
                 case "-" -> {
                     Double subtrahend = stack_2.pop();
