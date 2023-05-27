@@ -20,13 +20,21 @@ public class PostfixStatement {
         while (!stack_1.isEmpty()) {
             String operand = stack_1.pop();
             switch (operand) {
-                case "+" -> stack_2.push(stack_2.pop() + stack_2.pop());
+                case "+" -> {
+                    Double addend_1 = stack_2.pop();
+                    Double addend_2 = stack_2.pop();
+                    stack_2.push( addend_1 + addend_2);
+                }
                 case "-" -> {
                     Double subtrahend = stack_2.pop();
                     Double minuend = stack_2.pop();
                     stack_2.push(minuend - subtrahend);
                 }
-                case "*" -> stack_2.push(stack_2.pop() * stack_2.pop());
+                case "*" -> {
+                    Double multiplicand= stack_2.pop();
+                    Double multiplier = stack_2.pop();
+                    stack_2.push(multiplier * multiplicand);
+                }
                 case "/" -> {
                     Double divisor = stack_2.pop();
                     Double dividend = stack_2.pop();
