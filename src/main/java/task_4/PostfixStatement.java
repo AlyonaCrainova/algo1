@@ -19,12 +19,12 @@ public class PostfixStatement {
         }
         while (!stack_1.isEmpty()) {
             String operand = stack_1.pop();
-            if (operand.equals("=")) {
-                return stack_2.pop();
-            }
             if (operand.matches("[0-9]+")) {
                 stack_2.push(Double.parseDouble(operand));
                 continue;
+            }
+            if (operand.equals("=")) {
+                return stack_2.pop();
             }
             Double right = stack_2.pop();
             Double left = stack_2.pop();
