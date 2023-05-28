@@ -19,31 +19,20 @@ public class PostfixStatement {
         }
         while (!stack_1.isEmpty()) {
             String operand = stack_1.pop();
+            if (operand.equals("=")) {
+                return stack_2.pop();
+            }
+            if (operand.matches("[0-9]+")) {
+                stack_2.push(Double.parseDouble(operand));
+                continue;
+            }
+            Double right = stack_2.pop();
+            Double left = stack_2.pop();
             switch (operand) {
-                case "+" -> {
-                    Double addend_1 = stack_2.pop();
-                    Double addend_2 = stack_2.pop();
-                    stack_2.push(addend_1 + addend_2);
-                }
-                case "-" -> {
-                    Double subtrahend = stack_2.pop();
-                    Double minuend = stack_2.pop();
-                    stack_2.push(minuend - subtrahend);
-                }
-                case "*" -> {
-                    Double multiplicand= stack_2.pop();
-                    Double multiplier = stack_2.pop();
-                    stack_2.push(multiplier * multiplicand);
-                }
-                case "/" -> {
-                    Double divisor = stack_2.pop();
-                    Double dividend = stack_2.pop();
-                    stack_2.push(dividend / divisor);
-                }
-                case "=" -> {
-                    return stack_2.pop();
-                }
-                default -> stack_2.push(Double.parseDouble(operand));
+                case "+" -> stack_2.push(left + right);
+                case "-" -> stack_2.push(left - right);
+                case "*" -> stack_2.push(left * right);
+                case "/" -> stack_2.push(left / right);
             }
         }
         previousResult = stack_2.pop();
