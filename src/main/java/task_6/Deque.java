@@ -2,36 +2,35 @@ package task_6;
 
 import java.util.*;
 
-public class Deque<T>
-{
-    LinkedList<T> list;
-    public Deque()
-    {
-        list = new LinkedList<>();
+public class Deque<T> {
+    ArrayList<T> list;
+
+    public Deque() {
+        list = new ArrayList<>();
     }
 
-    public void addFront(T item)
-    {
-        list.addFirst(item);
+    public void addFront(T item) {
+        list.add(0, item);
     }
 
-    public void addTail(T item)
-    {
-        list.addLast(item);
+    public void addTail(T item) {
+        list.add(item);
     }
 
-    public T removeFront()
-    {
-        return list.pollFirst();
+    public T removeFront() {
+        return list.isEmpty()? null : list.remove(0);
     }
 
-    public T removeTail()
-    {
-        return list.pollLast();
+    public T removeTail() {
+        return list.isEmpty()? null : list.remove(list.size() - 1);
     }
 
-    public int size()
-    {
+    public int size() {
         return list.size();
     }
+
+    public boolean contains(T item) {
+        return list.contains(item);
+    }
+
 }
