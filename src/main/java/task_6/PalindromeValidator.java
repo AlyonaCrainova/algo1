@@ -6,14 +6,12 @@ public class PalindromeValidator {
         if (clearedInput.isEmpty()) {
             return false;
         }
-        Deque<String> direct_order = new Deque<>();
-        Deque<String> reverse_order = new Deque<>();
+        Deque<String> deque = new Deque<>();
         for (String operand: clearedInput.split(" ")) {
-            direct_order.addTail(operand);
-            reverse_order.addTail(operand);
+            deque.addTail(operand);
         }
-        while (direct_order.size() > 0 && reverse_order.size() > 0){
-            if(!direct_order.removeFront().equals(reverse_order.removeTail())){
+        while (deque.size() > 1){
+            if(!deque.removeFront().equals(deque.removeTail())){
                 return false;
             }
         }

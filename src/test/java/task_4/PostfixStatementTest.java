@@ -61,4 +61,12 @@ public class PostfixStatementTest {
         Double result = statement.calculate("18 2 + 5 * 5 - =");
         assertEquals(95, result);
     }
+
+    @Test
+    void calculate_invalid_input_negative() throws InvalidInputException {
+        Exception exception = assertThrows(InvalidInputException.class, () -> {
+            statement.calculate("-18 2 + 5 * 5 - =");
+        });
+        assertNotNull(exception);
+    }
 }
