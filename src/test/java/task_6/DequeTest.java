@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DequeueTest {
+public class DequeTest {
     private final Deque<Integer> queue = new Deque<>();
 
     @Test
