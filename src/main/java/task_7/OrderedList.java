@@ -122,6 +122,7 @@ public class OrderedList<T> {
         }
         this.tail = _item;
     }
+
     private void insertAfter(Node<T> _nodeAfter, Node<T> _nodeToInsert) {
         if (_nodeToInsert == null) {
             return;
