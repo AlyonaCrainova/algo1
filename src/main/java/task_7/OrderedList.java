@@ -26,11 +26,11 @@ public class OrderedList<T> {
     public int compare(T v1, T v2) {
         int compare = 0;
         if (v1 instanceof String) {
-            compare = (((String) v1).trim()).compareTo(((String) v2).trim());
+            compare = Integer.compare((((String) v1).trim()).compareTo(((String) v2).trim()), 0);
         } else if (v1 instanceof Integer) {
             compare = Integer.compare((int) v1, (int) v2);
         }
-        return Integer.compare(compare, 0);
+        return compare;
     }
 
     public void add(T value) {
@@ -44,9 +44,7 @@ public class OrderedList<T> {
             int compare = compare(value, current.value);
             if (compare == 0) {
                 insertAfter(current, newNode);
-                return;
-            }
-            if ((_ascending && compare == 1 || !_ascending && compare == -1) && current == tail) {
+            } else if ((_ascending && compare == 1 || !_ascending && compare == -1) && current == tail) {
                 addInTail(newNode);
             } else if (_ascending && compare == 1 || !_ascending && compare == -1) {
                 current = current.next;
@@ -83,10 +81,11 @@ public class OrderedList<T> {
 
     public void clear(boolean asc) {
         _ascending = asc;
-        Node<T> node = head;
-        while (node != null) {
-            removeNode(node);
-            node = node.next;
+        Node<T> current = this.head;
+        while (current != null) {
+            Node<T> previous = current;
+            current = current.next;
+            previous.prev = previous.next = null;
         }
         head = tail = null;
     }
@@ -102,7 +101,7 @@ public class OrderedList<T> {
     }
 
     ArrayList<Node<T>> getAll() {
-        ArrayList<Node<T>> r = new ArrayList<Node<T>>();
+        ArrayList<Node<T>> r = new ArrayList<>();
         Node<T> node = head;
         while (node != null) {
             r.add(node);
@@ -131,7 +130,7 @@ public class OrderedList<T> {
             addInTail(_nodeToInsert);
         } else if (_nodeAfter == null) {
             addToHead(_nodeToInsert);
-        }else {
+        } else {
             _nodeToInsert.next = _nodeAfter.next;
             _nodeToInsert.prev = _nodeAfter;
             _nodeAfter.next = _nodeToInsert;
@@ -153,13 +152,13 @@ public class OrderedList<T> {
         }
     }
 
-    private void removeNode(Node<T> node){
+    private void removeNode(Node<T> node) {
         if (node == head && node == tail) {
             node.prev = node.next = head = tail = null;
-        } else if (node == head){
+        } else if (node == head) {
             head = head.next;
             head.prev = null;
-        }else if (node == tail) {
+        } else if (node == tail) {
             tail = tail.prev;
             tail.next = null;
         } else {

@@ -3,6 +3,8 @@ package task_7;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OrderedListIntegerTest {
@@ -172,11 +174,16 @@ public class OrderedListIntegerTest {
     void clear_non_empty() {
         orderedList.add(1);
         orderedList.add(2);
+        ArrayList<Node<Integer>> list = orderedList.getAll();
 
         orderedList.clear(true);
-
         assertNull(orderedList.head);
         assertNull(orderedList.tail);
         assertEquals(orderedList.count(), 0);
+        assertEquals(list.size(), 2);
+        assertNull(list.get(0).prev);
+        assertNull(list.get(0).next);
+        assertNull(list.get(1).prev);
+        assertNull(list.get(1).next);
     }
 }
