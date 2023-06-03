@@ -126,10 +126,21 @@ public class HashTableTest {
     }
     
     @Test
-    void find_fail() {
+    void find_single_value_table_fail() {
         hashTable.put("z");
 
         int found = hashTable.find("lll");
+
+        assertEquals(-1 , found);
+    }
+
+    @Test
+    void find_in_full_table_fail() {
+        for(int i = 0; i < hashTable.size; i++){
+            hashTable.slots[i] = String.valueOf(i);
+        }
+
+        int found = hashTable.find("z");
 
         assertEquals(-1 , found);
     }
