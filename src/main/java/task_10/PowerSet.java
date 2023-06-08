@@ -11,7 +11,7 @@ public class PowerSet {
     }
 
     public int size() {
-        return slots.length;
+        return count;
     }
 
     private PowerSet(PowerSet set) {
@@ -124,7 +124,4 @@ public class PowerSet {
         return -1;
     }
 
-    public int count(){
-        return count;
-    }
 }

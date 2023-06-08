@@ -12,7 +12,7 @@ public class PowerSetTest {
         set.put("Abc");
 
         assertTrue(set.get("Abc"));
-        assertEquals(1, set.count());
+        assertEquals(1, set.size());
     }
 
     @Test
@@ -22,7 +22,7 @@ public class PowerSetTest {
         set.put("Abc");
 
         assertTrue(set.get("Abc"));
-        assertEquals(1, set.count());
+        assertEquals(1, set.size());
     }
 
     @Test
@@ -32,7 +32,7 @@ public class PowerSetTest {
         boolean deleted = set.remove("Abc");
 
         assertTrue(deleted);
-        assertEquals(0, set.count());
+        assertEquals(0, set.size());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class PowerSetTest {
         boolean deleted = set.remove("Def");
 
         assertFalse(deleted);
-        assertEquals(1, set.count());
+        assertEquals(1, set.size());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class PowerSetTest {
 
         PowerSet intersection = set.intersection(set2);
 
-        assertEquals(0, intersection.count());
+        assertEquals(0, intersection.size());
     }
 
     @Test
@@ -68,7 +68,7 @@ public class PowerSetTest {
 
         PowerSet intersection = set.intersection(set2);
 
-        assertEquals(2, intersection.count());
+        assertEquals(2, intersection.size());
         assertTrue(intersection.get("apple"));
         assertTrue(intersection.get("pineapple"));
     }
@@ -84,7 +84,7 @@ public class PowerSetTest {
 
         PowerSet union = set.union(set2);
 
-        assertEquals(3, union.count());
+        assertEquals(3, union.size());
         assertTrue(union.get("apple"));
         assertTrue(union.get("banana"));
         assertTrue(union.get("pineapple"));
@@ -99,7 +99,7 @@ public class PowerSetTest {
 
         PowerSet union = set.union(set2);
 
-        assertEquals(3, union.count());
+        assertEquals(3, union.size());
         assertTrue(union.get("apple"));
         assertTrue(union.get("banana"));
         assertTrue(union.get("pineapple"));
@@ -114,7 +114,7 @@ public class PowerSetTest {
 
         PowerSet union = set.union(set2);
 
-        assertEquals(3, union.count());
+        assertEquals(3, union.size());
         assertTrue(union.get("apple"));
         assertTrue(union.get("banana"));
         assertTrue(union.get("pineapple"));
@@ -131,7 +131,7 @@ public class PowerSetTest {
 
         PowerSet difference = set.difference(set2);
 
-        assertEquals(1, difference.count());
+        assertEquals(1, difference.size());
         assertTrue(difference.get("banana"));
     }
 
@@ -144,7 +144,7 @@ public class PowerSetTest {
 
         PowerSet difference = set.difference(set2);
 
-        assertEquals(0, difference.count());
+        assertEquals(0, difference.size());
     }
 
     @Test
@@ -156,7 +156,7 @@ public class PowerSetTest {
 
         PowerSet difference = set.difference(set2);
 
-        assertEquals(3, difference.count());
+        assertEquals(3, difference.size());
         assertTrue(difference.get("apple"));
         assertTrue(difference.get("banana"));
         assertTrue(difference.get("pineapple"));
@@ -205,5 +205,10 @@ public class PowerSetTest {
         boolean isSubset = set.isSubset(set2);
 
         assertFalse(isSubset);
+    }
+
+    @Test
+    void size_empty() {
+        assertEquals(0, set.size());
     }
 }
