@@ -1,7 +1,6 @@
 package task_10;
 
 import org.junit.jupiter.api.Test;
-import task_9.NativeDictionary;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +12,7 @@ public class PowerSetTest {
         set.put("Abc");
 
         assertTrue(set.get("Abc"));
-        assertEquals(1, set.size());
+        assertEquals(1, set.count());
     }
 
     @Test
@@ -23,7 +22,7 @@ public class PowerSetTest {
         set.put("Abc");
 
         assertTrue(set.get("Abc"));
-        assertEquals(1, set.size());
+        assertEquals(1, set.count());
     }
 
     @Test
@@ -33,7 +32,7 @@ public class PowerSetTest {
         boolean deleted = set.remove("Abc");
 
         assertTrue(deleted);
-        assertEquals(0, set.size());
+        assertEquals(0, set.count());
     }
 
     @Test
@@ -43,7 +42,7 @@ public class PowerSetTest {
         boolean deleted = set.remove("Def");
 
         assertFalse(deleted);
-        assertEquals(1, set.size());
+        assertEquals(1, set.count());
     }
 
     @Test
@@ -55,7 +54,7 @@ public class PowerSetTest {
 
         PowerSet intersection = set.intersection(set2);
 
-        assertEquals(0, intersection.size());
+        assertEquals(0, intersection.count());
     }
 
     @Test
@@ -69,7 +68,7 @@ public class PowerSetTest {
 
         PowerSet intersection = set.intersection(set2);
 
-        assertEquals(2, intersection.size());
+        assertEquals(2, intersection.count());
         assertTrue(intersection.get("apple"));
         assertTrue(intersection.get("pineapple"));
     }
@@ -85,7 +84,7 @@ public class PowerSetTest {
 
         PowerSet union = set.union(set2);
 
-        assertEquals(3, union.size());
+        assertEquals(3, union.count());
         assertTrue(union.get("apple"));
         assertTrue(union.get("banana"));
         assertTrue(union.get("pineapple"));
@@ -100,7 +99,7 @@ public class PowerSetTest {
 
         PowerSet union = set.union(set2);
 
-        assertEquals(3, union.size());
+        assertEquals(3, union.count());
         assertTrue(union.get("apple"));
         assertTrue(union.get("banana"));
         assertTrue(union.get("pineapple"));
@@ -115,7 +114,7 @@ public class PowerSetTest {
 
         PowerSet union = set.union(set2);
 
-        assertEquals(3, union.size());
+        assertEquals(3, union.count());
         assertTrue(union.get("apple"));
         assertTrue(union.get("banana"));
         assertTrue(union.get("pineapple"));
@@ -132,7 +131,7 @@ public class PowerSetTest {
 
         PowerSet difference = set.difference(set2);
 
-        assertEquals(1, difference.size());
+        assertEquals(1, difference.count());
         assertTrue(difference.get("banana"));
     }
 
@@ -145,7 +144,7 @@ public class PowerSetTest {
 
         PowerSet difference = set.difference(set2);
 
-        assertEquals(0, difference.size());
+        assertEquals(0, difference.count());
     }
 
     @Test
@@ -157,7 +156,7 @@ public class PowerSetTest {
 
         PowerSet difference = set.difference(set2);
 
-        assertEquals(3, difference.size());
+        assertEquals(3, difference.count());
         assertTrue(difference.get("apple"));
         assertTrue(difference.get("banana"));
         assertTrue(difference.get("pineapple"));

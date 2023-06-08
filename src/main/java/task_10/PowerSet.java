@@ -1,32 +1,43 @@
 package task_10;
 
+
 public class PowerSet {
-    private ArrayList<String> list;
+    public String[] slots;
+    int count;
+    private static final int STEP = 1;
 
     public PowerSet() {
-        list = new ArrayList<>();
+        slots = new String[20000];
     }
 
     public int size() {
-        return list.size();
+        return slots.length;
     }
 
-    private PowerSet(ArrayList<String> set) {
-        list = set;
+    private PowerSet(PowerSet set) {
+        slots = set.slots;
+        count = set.count;
     }
 
     public void put(String value) {
-        if (!list.contains(value)) {
-            list.add(value);
+        int index = seekSlot(value);
+        if (index != -1) {
+            slots[index] = value;
+            count ++;
         }
     }
 
     public boolean get(String value) {
-        return list.contains(value);
+        return find(value) != -1;
     }
 
     public boolean remove(String value) {
-        return list.remove(value);
+        int index = find(value);
+        if(index != -1) {
+            slots[index] = null;
+            count --;
+        }
+        return index != -1;
     }
 
     public PowerSet intersection(PowerSet set2) {
@@ -34,9 +45,9 @@ public class PowerSet {
             return new PowerSet();
         }
         PowerSet intersection = new PowerSet();
-        for (String s : list) {
-            if (set2.get(s)) {
-                intersection.put(s);
+        for (String value : slots) {
+            if (value != null && set2.get(value)) {
+                intersection.put(value);
             }
         }
         return intersection;
@@ -44,22 +55,24 @@ public class PowerSet {
 
     public PowerSet union(PowerSet set2) {
         if (set2 == null){
-            return new PowerSet(list);
+            return new PowerSet(this);
         }
-        PowerSet union = new PowerSet(set2.list);
-        for (String value: list) {
-            union.put(value);
+        PowerSet union = new PowerSet(set2);
+        for (String value: slots) {
+            if(value != null) {
+                union.put(value);
+            }
         }
         return union;
     }
 
     public PowerSet difference(PowerSet set2) {
         if (set2 == null){
-            return new PowerSet(list);
+            return new PowerSet(this);
         }
         PowerSet difference = new PowerSet();
-        for (String value: list) {
-            if(!set2.list.contains(value)){
+        for (String value: slots) {
+            if(value != null && !set2.get(value)){
                 difference.put(value);
             }
         }
@@ -70,11 +83,48 @@ public class PowerSet {
         if (set2 == null){
             return false;
         }
-        for (String value: set2.list) {
-            if(!list.contains(value)){
+        for (String value: set2.slots) {
+            if(value != null && !get(value)){
                 return false;
             }
         }
         return true;
+    }
+
+    private int hashFun(String value) {
+        int sum = 0;
+        for (char c : value.toCharArray()) {
+            sum = ((sum * 94) % slots.length + (c - '!' + 1)) % slots.length;
+        }
+        return sum;
+    }
+
+    private int seekSlot(String value) {
+        int base = hashFun(value);
+        for (int i = 0; i <= slots.length / STEP; i++) {
+            int nextProbe = (base + STEP * i) % slots.length;
+            if (slots[nextProbe] == null) {
+                return nextProbe;
+            }
+            if(slots[nextProbe].equals(value)){
+                return -1;
+            }
+        }
+        return -1;
+    }
+
+    private int find(String value) {
+        int base = hashFun(value);
+        for (int i = 0; i <= slots.length / STEP; i++) {
+            int nextProbe = (base + STEP * i) % slots.length;
+            if (slots[nextProbe] != null && slots[nextProbe].equals(value)) {
+                return nextProbe;
+            }
+        }
+        return -1;
+    }
+
+    public int count(){
+        return count;
     }
 }
