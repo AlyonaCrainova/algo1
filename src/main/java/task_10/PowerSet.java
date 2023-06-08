@@ -2,8 +2,8 @@ package task_10;
 
 
 public class PowerSet {
-    public String[] slots;
-    int count;
+    private String[] slots;
+    private int count;
     private static final int STEP = 1;
 
     public PowerSet() {
