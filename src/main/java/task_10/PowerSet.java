@@ -1,6 +1,5 @@
 package task_10;
 
-
 public class PowerSet {
     private String[] slots;
     private int count;
@@ -15,7 +14,10 @@ public class PowerSet {
     }
 
     private PowerSet(PowerSet set) {
-        slots = set.slots;
+        slots = new String[20000];
+        if (set.slots != null) {
+            System.arraycopy(set.slots, 0, slots, 0, set.slots.length);
+        }
         count = set.count;
     }
 
@@ -54,13 +56,12 @@ public class PowerSet {
     }
 
     public PowerSet union(PowerSet set2) {
-        if (set2 == null){
-            return new PowerSet(this);
-        }
-        PowerSet union = new PowerSet(set2);
-        for (String value: slots) {
-            if(value != null) {
-                union.put(value);
+        PowerSet union = new PowerSet(this);
+        if(set2 != null) {
+            for (String value : set2.slots) {
+                if (value != null) {
+                    union.put(value);
+                }
             }
         }
         return union;
